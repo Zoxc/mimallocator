@@ -54,11 +54,11 @@ fn main() {
         .define("OVERRIDE", "OFF")
         .build();
 
-    println!("cargo:rustc-link-search=native={}/lib", dst.display());
+    println!("cargo:rustc-link-search=native={}/lib/mimalloc-1.0", dst.display());
     let lib_name = match profile.as_str() {
         "debug" => "mimalloc-debug",
         "release" => "mimalloc",
         p => panic!("unknown profile \"{}\"", p),
     };
-    println!("cargo:rustc-link-lib=dylib={}", lib_name);
+    println!("cargo:rustc-link-lib=static={}", lib_name);
 }
